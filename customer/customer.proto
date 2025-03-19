@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package Customer;
+
+import "./customer.auth.proto";
+
+service CustomerService {
+  rpc Find (ById) returns (CustomerResp) {};
+    rpc Login (LoginT1Req) returns (Tokens) {};
+}
+
+message LoginT1Req {
+  string usr = 1;
+  string password = 2;
+}
+
+message Tokens {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+}
+
+message ById {
+  int32 id = 1;
+}
+
+message CustomerResp {
+  int32 id = 1;
+  string name = 2;
+}

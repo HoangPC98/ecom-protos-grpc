@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package CustomerAuth;
+
+service CustomerAuthService {
+  rpc Login (LoginT1Req) returns (Tokens) {};
+  rpc SignUp (SignUpReq) returns (Tokens) {};
+  rpc GetMfaCode (GetMfaCodeReq) returns (GetMfaCodeResp) {};
+  rpc Logout (LogoutReq) returns(LogoutResp) {};
+}
+
+message LoginT1Req {
+  string usr = 1;
+  string password = 2;
+}
+
+message Tokens {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+}
+
+message SignUpReq {
+  string usr = 1;
+  string password = 2; 
+  string invite_code = 3;
+}
+
+message GetMfaCodeReq {
+  string usr = 1;
+  string mfa_type = 2;
+}
+
+message GetMfaCodeResp {
+  string code = 1;
+  int32 expried_in = 2;
+}
+
+message LogoutReq {
+  string access_token = 1;
+  bool log_out_all = 2;
+}
+
+message LogoutResp {
+  string status = 1;
+}
+
