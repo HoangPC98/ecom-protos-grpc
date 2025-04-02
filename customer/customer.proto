@@ -2,11 +2,13 @@ syntax = "proto3";
 
 package Customer;
 
-import "./customer.auth.proto";
-
 service CustomerService {
-  rpc Find (ById) returns (CustomerResp) {};
-    rpc Login (LoginT1Req) returns (Tokens) {};
+  rpc Login (LoginT1Req) returns (LoginT1Res) {};
+  rpc SignUp (SignUpT1Req) returns (SignUpT1Res) {};
+}
+
+message ById {
+  int32 id = 1;
 }
 
 message LoginT1Req {
@@ -14,17 +16,21 @@ message LoginT1Req {
   string password = 2;
 }
 
-message Tokens {
-  string access_token = 1;
-  string refresh_token = 2;
-  string token_type = 3;
+message LoginT1Res {
+  int32 status = 1;
+  int32 uid = 2;
+  string type = 3;
+  string role = 4;
+  string fcm_token = 5;
 }
 
-message ById {
-  int32 id = 1;
+message SignUpT1Req {
+  string usr = 1;
+  string password = 2; 
+  string invite_code = 3;
 }
 
-message CustomerResp {
-  int32 id = 1;
-  string name = 2;
+message SignUpT1Res {
+  int32 status = 1;
+  string uid = 2;
 }
